@@ -1,0 +1,24 @@
+create table shopping(
+    serial_number int primary key,
+    goods_name text,prices int,merchant text);
+insert into shopping values(
+24,"sugannya",500,"veg seller"),(
+28,"kani",300,"non veg seller"),(
+35,"vani",600,"shopkeeper"),(
+47,"sugan",800,"owner");
+select * from shopping;
+
+create table customer(
+     c_id int primary key,
+     name text,
+     age int,
+     purchase_cost int,
+     address text,serial_number int,constraint fk_serial_number foreign key(serial_number) references shopping(serial_number));
+insert into customer values(1,"sugan",20,1000,"rasipuram",28),(2,"suganya",40,2000,"salem",47),
+     (3,"vanitha",70,5000,"namakkal",35),(4,"raghu",80,5000,"rasipuram",24);
+select * from customer;
+select * from customer order by purchase_cost desc;
+select shopping.serial_number,shopping.goods_name,shopping.prices,customer.name from shopping inner join customer on shopping.serial_number=customer.serial_number order by serial_number;
+select shopping.serial_number,shopping.goods_name,shopping.prices,customer.name from shopping right join customer on shopping.serial_number=customer.serial_number order by serial_number;
+select shopping.serial_number,shopping.goods_name,shopping.prices,customer.name from shopping left join customer on shopping.serial_number=customer.serial_number order by serial_number;
+select * from customer where purchase_cost>2000;
